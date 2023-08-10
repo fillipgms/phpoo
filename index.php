@@ -1,58 +1,42 @@
-<?php
-require ("Carro.php");
-require ("Retangulo.php");
-//nome da classe
-class Fruta{
-    //nome dos atributos
-    private $nome;
-    public $cor;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemplo de Formulário e Classe Pessoa</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css\styles.css">
+</head>
+<body>
+    <div class="container">
+        <h3>Formulário do Retângulo</h3>
+        <form method="post">
+            <div class="form-group">
+                <label for="altura">Altura:</label>
+                <input type="number" class="form-control" id="altura" name="altura" required>
+            </div>
+            <div class="form-group">
+                <label for="largura">Largura:</label>
+                <input type="number" class="form-control" id="largura" name="largura" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        
+        <?php
+            include 'Retangulo.php';
 
-    /*Métodos */
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                $altura = $_POST["altura"];
+                $largura = $_POST["largura"];
 
-    function __construct($nome, $cor)
-    {
-        $this->nome = $nome;
-        $this->cor = $cor;
-    }
-    function set_name($nome){
-        $this->nome = $nome;
-    }
-    function set_cor($cor){
-        $this->cor = $cor;
-    }
-    //  
-    function get_name(){
-        return $this->nome;
-    }
-    function get_cor(){
-        return $this->cor;
-    }
+                $carro = new Retangulo($altura, $largura);
 
-}
-//A palavra new cria um objeto do tipo Fruta
-$maca = new Fruta("maca_ifsp","vermelho");
-/* Atribuindo um nome para o meu objeto 
-através do métodos set_name */
-//$maca->set_name("maca_ifsp");
-// o comando abaixo imprime se a atributo for public
-//echo $maca->nome;
-/* o comando abaixo imprime se o atributo 
-for public ou private */
-echo "</br>".$maca->get_name();
-//$maca->set_cor("vermelho");
-echo "</br>".$maca->get_cor();
+                echo "<h1>dados enviados! </h1>";
 
-$carro = new Carro("Hyndai","hb20","2015");
-echo "</br>".$carro->get_marca();
-echo "</br>".$carro->get_modelo();
-echo "</br>".$carro->get_ano();
+                echo "<p><strong>Área: </strong>". $carro->calcular_area(). "</p>";
+                echo "<p><strong>Perimetro: </strong>". $carro->calcular_perimetro(). "</p>";
+                
+            }
+        ?>
 
-$retangulo_ifsp = new Retangulo(2,4);
-echo "</br>".$retangulo_ifsp->calcular_area();
-echo "</br>".$retangulo_ifsp->calcular_perimetro();
-
-
-
-
-
-?>
+    </div>
+</body>
+</html>

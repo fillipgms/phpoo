@@ -3,8 +3,7 @@ class Carro{
     public $marca;
     public $modelo;
     public $ano;
-
-    // Métodos
+    
     function __construct($marca, $modelo, $ano){
         $this->marca = $marca;
         $this->modelo = $modelo;
